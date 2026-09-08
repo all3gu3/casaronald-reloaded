@@ -3,55 +3,75 @@
 @section('description-page', 'Reportes de servicios, cuentas del personal y bitácora de actividad')
 @section('content')
 <div class="pagina">
+    {{-- Los avisos viven al principio de la página: las tres acciones (crear
+         cuenta, restablecer contraseña y activar/desactivar) regresan aquí y
+         su resultado debe verse sin desplazarse. --}}
+    @if (session('exito'))
+        <div class="alert alert-success">{{ session('exito') }}</div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <small class="d-block">{{ $error }}</small>
+            @endforeach
+        </div>
+    @endif
+
     <section class="pagina-tarjeta">
         {{-- Sin encabezado de página: la primera tarjeta arranca directo en su
-             sección, igual que las de reportes y actividad. --}}
+             sección. --}}
         <div class="pagina-cuerpo pagina-cuerpo-primero">
             <div class="bitacora-encabezado">
-                <h2><i class="fas fa-user-plus" aria-hidden="true"></i> Nueva cuenta</h2>
+                <h2><i class="fas fa-chart-column" aria-hidden="true"></i> Reportes de servicios</h2>
             </div>
-            <p class="bitacora-sub">Alta de una cuenta para el personal de la Casa. Solo los administradores pueden crearlas.</p>
+            <p class="bitacora-sub">Desglose de uso de lavandería, comedor, escuelita y transporte por bloque de tiempo.</p>
 
-            @if (session('exito'))
-                <div class="alert alert-success">{{ session('exito') }}</div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <small class="d-block">{{ $error }}</small>
-                    @endforeach
+            <div class="reportes-controles">
+                <div class="reportes-bloques" role="group" aria-label="Bloque de tiempo">
+                    <button type="button" class="reportes-bloque activo" data-periodo="dia">Hoy</button>
+                    <button type="button" class="reportes-bloque" data-periodo="semana">Semana</button>
+                    <button type="button" class="reportes-bloque" data-periodo="mes">Mes</button>
+                    <button type="button" class="reportes-bloque" data-periodo="ano">Año</button>
+                    <button type="button" class="reportes-bloque" data-periodo="todo">Todo</button>
                 </div>
-            @endif
+                <form id="reporte_rango" class="reportes-rango">
+                    <label for="reporte_desde">Del</label>
+                    <input type="date" id="reporte_desde" class="form-control" required>
+                    <label for="reporte_hasta">al</label>
+                    <input type="date" id="reporte_hasta" class="form-control" required>
+                    <button type="submit" class="reportes-aplicar">Aplicar</button>
+                </form>
+            </div>
 
-            <form method="POST" action="{{ route('administracion.store') }}" class="formulario-campos">
-                @csrf
-                <div>
-                    <label for="name">Nombre</label>
-                    <input id="name" name="name" value="{{ old('name') }}" class="form-control" required>
+            <div class="reportes-resumen">
+                <p id="reporte_descripcion" class="reportes-descripcion" aria-live="polite"></p>
+                <a id="reporte_excel" class="pagina-boton-primario reportes-excel"
+                   href="{{ route('administracion.reportes.excel', ['periodo' => 'dia']) }}">
+                    <i class="fas fa-file-excel" aria-hidden="true"></i>
+                    <span>Descargar reporte</span>
+                </a>
+            </div>
+
+            <div class="reportes-kpis">
+                <div class="reportes-kpi reportes-kpi-total">
+                    <span class="reportes-kpi-valor" id="kpi_total">—</span>
+                    <span class="reportes-kpi-nombre">Registros</span>
                 </div>
-                <div>
-                    <label for="email">Correo</label>
-                    <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control" required>
-                </div>
-                <div>
-                    <label for="password">Contraseña</label>
-                    <input id="password" type="password" name="password" class="form-control" required autocomplete="new-password">
-                </div>
-                <div class="campo-2">
-                    <label for="role">Rol</label>
-                    <select id="role" name="role" class="form-control">
-                        <option value="staff" @selected(old('role') === 'staff')>Personal operativo</option>
-                        <option value="trabajador_social" @selected(old('role') === 'trabajador_social')>Trabajador social</option>
-                        <option value="master" @selected(old('role') === 'master')>Administrador</option>
-                    </select>
-                </div>
-                <div class="formulario-accion">
-                    <button type="submit" class="pagina-boton-primario">
-                        <i class="fas fa-user-plus" aria-hidden="true"></i>
-                        <span>Crear cuenta</span>
-                    </button>
-                </div>
-            </form>
+                @foreach ($servicios as $servicio)
+                    <div class="reportes-kpi">
+                        <span class="reportes-kpi-valor" id="kpi_{{ $servicio->value }}">—</span>
+                        <span class="reportes-kpi-nombre">
+                            <span class="reportes-kpi-dot" data-servicio="{{ $servicio->value }}" aria-hidden="true"></span>
+                            {{ $servicio->etiqueta() }}
+                        </span>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="reportes-grafico">
+                <canvas id="grafico_servicios" role="img" aria-label="Gráfico de uso de servicios por periodo"></canvas>
+            </div>
+            <p id="reporte_vacio" class="reportes-vacio" hidden>Sin registros de servicios en este periodo.</p>
         </div>
     </section>
 
@@ -122,56 +142,39 @@
     <section class="pagina-tarjeta">
         <div class="pagina-cuerpo">
             <div class="bitacora-encabezado">
-                <h2><i class="fas fa-chart-column" aria-hidden="true"></i> Reportes de servicios</h2>
+                <h2><i class="fas fa-user-plus" aria-hidden="true"></i> Nueva cuenta</h2>
             </div>
-            <p class="bitacora-sub">Desglose de uso de lavandería, comedor, escuelita y transporte por bloque de tiempo.</p>
+            <p class="bitacora-sub">Alta de una cuenta para el personal de la Casa. Solo los administradores pueden crearlas.</p>
 
-            <div class="reportes-controles">
-                <div class="reportes-bloques" role="group" aria-label="Bloque de tiempo">
-                    <button type="button" class="reportes-bloque activo" data-periodo="dia">Hoy</button>
-                    <button type="button" class="reportes-bloque" data-periodo="semana">Semana</button>
-                    <button type="button" class="reportes-bloque" data-periodo="mes">Mes</button>
-                    <button type="button" class="reportes-bloque" data-periodo="ano">Año</button>
-                    <button type="button" class="reportes-bloque" data-periodo="todo">Todo</button>
+            <form method="POST" action="{{ route('administracion.store') }}" class="formulario-campos">
+                @csrf
+                <div>
+                    <label for="name">Nombre</label>
+                    <input id="name" name="name" value="{{ old('name') }}" class="form-control" required>
                 </div>
-                <form id="reporte_rango" class="reportes-rango">
-                    <label for="reporte_desde">Del</label>
-                    <input type="date" id="reporte_desde" class="form-control" required>
-                    <label for="reporte_hasta">al</label>
-                    <input type="date" id="reporte_hasta" class="form-control" required>
-                    <button type="submit" class="reportes-aplicar">Aplicar</button>
-                </form>
-            </div>
-
-            <div class="reportes-resumen">
-                <p id="reporte_descripcion" class="reportes-descripcion" aria-live="polite"></p>
-                <a id="reporte_excel" class="pagina-boton-primario reportes-excel"
-                   href="{{ route('administracion.reportes.excel', ['periodo' => 'dia']) }}">
-                    <i class="fas fa-file-excel" aria-hidden="true"></i>
-                    <span>Descargar reporte</span>
-                </a>
-            </div>
-
-            <div class="reportes-kpis">
-                <div class="reportes-kpi reportes-kpi-total">
-                    <span class="reportes-kpi-valor" id="kpi_total">—</span>
-                    <span class="reportes-kpi-nombre">Registros</span>
+                <div>
+                    <label for="email">Correo</label>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control" required>
                 </div>
-                @foreach ($servicios as $servicio)
-                    <div class="reportes-kpi">
-                        <span class="reportes-kpi-valor" id="kpi_{{ $servicio->value }}">—</span>
-                        <span class="reportes-kpi-nombre">
-                            <span class="reportes-kpi-dot" data-servicio="{{ $servicio->value }}" aria-hidden="true"></span>
-                            {{ $servicio->etiqueta() }}
-                        </span>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="reportes-grafico">
-                <canvas id="grafico_servicios" role="img" aria-label="Gráfico de uso de servicios por periodo"></canvas>
-            </div>
-            <p id="reporte_vacio" class="reportes-vacio" hidden>Sin registros de servicios en este periodo.</p>
+                <div>
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" name="password" class="form-control" required autocomplete="new-password">
+                </div>
+                <div class="campo-2">
+                    <label for="role">Rol</label>
+                    <select id="role" name="role" class="form-control">
+                        <option value="staff" @selected(old('role') === 'staff')>Personal operativo</option>
+                        <option value="trabajador_social" @selected(old('role') === 'trabajador_social')>Trabajador social</option>
+                        <option value="master" @selected(old('role') === 'master')>Administrador</option>
+                    </select>
+                </div>
+                <div class="formulario-accion">
+                    <button type="submit" class="pagina-boton-primario">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                        <span>Crear cuenta</span>
+                    </button>
+                </div>
+            </form>
         </div>
     </section>
 
