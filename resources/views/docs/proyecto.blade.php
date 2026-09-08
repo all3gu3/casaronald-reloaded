@@ -154,7 +154,7 @@
     <div class="num">2</div>
     <div>
       <h3>La credencial con código QR</h3>
-      <p>Al terminar el registro, el sistema imprime una <strong>credencial personalizada</strong> con los colores y el logotipo de la Fundación: el nombre del niño, su lugar de origen, su hospital, la lista de sus acompañantes y un código QR único de seis caracteres — por ejemplo <span class="qr">A1B2C3</span>. Esa tarjeta es la llave de la familia dentro de la Casa durante toda su estancia.</p>
+      <p>Al terminar el registro, el sistema imprime una <strong>credencial personalizada</strong> con los colores y el logotipo de la Fundación: el nombre del niño, su lugar de origen, su hospital, la lista de sus acompañantes y un código QR único de seis caracteres — por ejemplo <span class="qr">R2M4Z6</span>. Esa tarjeta es la llave de la familia dentro de la Casa durante toda su estancia.</p>
       <p class="escena">La familia guarda su credencial junto con el carnet del hospital. Ya no hay que preguntar el nombre completo ni buscar en la libreta: la tarjeta habla por ellos.</p>
     </div>
   </div>
@@ -207,7 +207,7 @@
 <article>
   <h2>Siguientes pasos que proponemos</h2>
   <ul>
-    <li><strong>Una demostración en vivo</strong> con el equipo de la Casa, usando datos de ejemplo (en esta demo, la familia de prueba es — cómo no — la del pequeño <em>Ronald Mc Uno</em>).</li>
+    <li><strong>Una demostración en vivo</strong> con el equipo de la Casa, usando datos de ejemplo (en esta demo, la familia de prueba es — cómo no — la del pequeño <em>Ronaldo Macías Zepeda</em>).</li>
     <li><strong>Revisión técnica</strong> por parte de la Dirección de Tecnología, con el documento técnico complementario.</li>
     <li><strong>Un piloto de cuatro semanas en un solo servicio</strong> — sugerimos el comedor — para medir el ahorro de tiempo real antes de decidir nada más.</li>
   </ul>
