@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::view('/casita-secreta', 'docs.index')->name('casita-secreta');
 Route::view('/casita-secreta/proyecto', 'docs.proyecto')->name('casita-proyecto');
 Route::view('/casita-secreta/tecnico', 'docs.tecnico')->name('casita-tecnico');
+Route::view('/casita-secreta/arquitectura', 'docs.arquitectura')->name('casita-arquitectura');
+Route::view('/casita-secreta/guia', 'docs.guia')->name('casita-guia');
 
 // Autenticación
 Route::middleware('guest')->group(function () {

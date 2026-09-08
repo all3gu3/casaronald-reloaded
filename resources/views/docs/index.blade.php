@@ -47,11 +47,10 @@
   }
   h1 span { color: var(--amarillo); }
   .sub { color: var(--gris); margin: 0 auto 2.2rem; max-width: 54ch; }
-  .cards { display: flex; gap: 1.4rem; flex-wrap: wrap; justify-content: center; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.4rem; }
   a.tarjeta {
-    flex: 1 1 300px;
-    max-width: 360px;
     display: block;
+    height: 100%;
     text-decoration: none;
     color: inherit;
     background: #fff;
@@ -75,6 +74,7 @@
   }
   .tarjeta.dir .tag { background: var(--amarillo); color: #5c4500; }
   .tarjeta.tec .tag { background: var(--azul); color: #fff; }
+  .tarjeta.eq .tag { background: var(--rojo); color: #fff; }
   .tarjeta h2 { font-family: "Raleway", sans-serif; font-weight: 800; font-size: 1.25rem; margin: 0 0 .5rem; color: var(--texto); }
   .tarjeta p { margin: 0; color: var(--gris); font-size: .95rem; line-height: 1.55; }
   hr.brand { border: none; height: 3px; background: var(--rojo); width: 70px; margin: 2.2rem auto 1.2rem; border-radius: 2px; }
@@ -85,7 +85,7 @@
   <main class="panel">
     <img class="logo" src="{{ asset('img/RMHC_Mexico_logo.png') }}" alt="Fundación Infantil Ronald McDonald México">
     <h1>Casita <span>Digital</span></h1>
-    <p class="sub">Propuesta de donación tecnológica para la operación diaria de la Casa Ronald McDonald. Dos documentos complementarios, cada uno escrito para su lector.</p>
+    <p class="sub">Propuesta y documentación del sistema de la Casa Ronald McDonald. Cuatro documentos complementarios, cada uno escrito para su lector.</p>
     <div class="cards">
       <a class="tarjeta dir" href="{{ route('casita-proyecto') }}">
         <span class="tag">Para la Dirección de la Casa</span>
@@ -96,6 +96,16 @@
         <span class="tag">Para la Dirección de Tecnología</span>
         <h2>El documento técnico</h2>
         <p>El mismo proyecto visto por dentro: arquitectura, modelo de datos, contrato de API, estado actual honesto del prototipo y el plan de endurecimiento antes de operar con datos reales.</p>
+      </a>
+      <a class="tarjeta tec" href="{{ route('casita-arquitectura') }}">
+        <span class="tag">Para la Dirección de Tecnología</span>
+        <h2>Modelo y arquitectura</h2>
+        <p>La documentación del sistema tal como está hoy: modelo de datos tabla por tabla, diagrama de clases, la infraestructura sobre la que corre y el catálogo completo de casos de uso con sus flujos.</p>
+      </a>
+      <a class="tarjeta eq" href="{{ route('casita-guia') }}">
+        <span class="tag">Para el equipo de la Casa</span>
+        <h2>Guía del equipo</h2>
+        <p>Cómo se usa el sistema, paso a paso y con las pantallas reales: entrar, registrar a una familia, imprimir su credencial, escanear en cada servicio y sacar los números del mes.</p>
       </a>
     </div>
     <hr class="brand">
