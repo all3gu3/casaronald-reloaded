@@ -48,6 +48,19 @@ ssh -i casaronald.pem ec2-user@SERVIDOR 'sudo bash /var/www/casaronald/deploy/de
 Publica primero los cambios en la rama `main`; el script hace `git pull --ff-only`, así que
 nunca pisa cambios hechos a mano en el servidor (si los hay, falla y avisa).
 
+## Directorio de trabajadoras sociales
+
+El expediente exige una trabajadora social y no hay pantalla para administrar ese
+catálogo, así que la instalación siembra solo la fila neutral **«Por asignar»**.
+Carga el directorio real una vez (una línea por persona):
+
+```bash
+sudo casaronald-artisan tinker --execute="foreach (['Nombre Uno', 'Nombre Dos'] as \$n) App\Models\TrabajadorSocial::firstOrCreate(['trabajador_social' => \$n]);"
+```
+
+Para volver a sembrar catálogos o restablecer la cuenta maestra con los `MASTER_*`
+del `.env`: `sudo bash /var/www/casaronald/deploy/deploy.sh --seed`.
+
 ## Cuando haya un dominio
 
 ```bash

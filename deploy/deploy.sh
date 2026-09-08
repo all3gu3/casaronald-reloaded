@@ -2,7 +2,10 @@
 # ---------------------------------------------------------------------------
 # deploy/deploy.sh — Instala (primera vez) o actualiza Casa Ronald en el servidor.
 #
-#   sudo bash /var/www/casaronald/deploy/deploy.sh [APP_HOST]
+#   sudo bash /var/www/casaronald/deploy/deploy.sh [APP_HOST] [--seed]
+#
+# --seed vuelve a ejecutar las semillas en una actualización (catálogos y cuenta
+# maestra según MASTER_* del .env; los catálogos existentes no se duplican).
 #
 # Primera ejecución (no existe .env): crea el .env de producción con secretos
 # generados, siembra catálogos y cuenta maestra, y muestra la contraseña maestra.
@@ -14,6 +17,14 @@ set -Eeuo pipefail
 APP_USER=casaronald
 APP_DIR=/var/www/casaronald
 BRANCH=main
+SEMBRAR=0
+ARGS=()
+for a in "$@"; do
+    case "$a" in
+        --seed) SEMBRAR=1 ;;
+        *) ARGS+=("$a") ;;
+    esac
+done
 
 log() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
 as_app() { sudo -u "$APP_USER" -H "$@"; }
@@ -40,7 +51,7 @@ log "Dependencias de producción (composer install --no-dev)"
 as_app composer install --no-dev --prefer-dist --no-interaction --no-progress --optimize-autoloader
 
 if [ "$PRIMERA_VEZ" -eq 1 ]; then
-    APP_HOST="${1:-$(imds public-ipv4)}"
+    APP_HOST="${ARGS[0]:-$(imds public-ipv4)}"
     log "Creando .env de producción para https://$APP_HOST"
     DB_PASS="$(cat "/home/$APP_USER/.db_password")"
     MASTER_PASS="$(openssl rand -base64 24 | tr -d '/+=' | cut -c1-16)"
@@ -57,7 +68,7 @@ fi
 log "Migraciones"
 as_app php artisan migrate --force --no-interaction
 
-if [ "$PRIMERA_VEZ" -eq 1 ]; then
+if [ "$PRIMERA_VEZ" -eq 1 ] || [ "$SEMBRAR" -eq 1 ]; then
     log "Semillas: catálogos, geografía y cuenta maestra"
     as_app php artisan db:seed --force --no-interaction
 fi

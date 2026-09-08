@@ -19,8 +19,11 @@ use Illuminate\Database\Seeder;
 /**
  * Catálogos de la operación (valores reales del prototipo, depurados):
  * - Se eliminaron las filas basura 'NO SPEC EN EXCEL' y 'x1'.
- * - Los 66 nombres reales de trabajadoras sociales (PII) se sustituyen por
- *   nombres ficticios; la Casa carga su directorio real al instalar.
+ * - Los 66 nombres reales de trabajadoras sociales (PII) no se siembran. Fuera de
+ *   producción se generan 12 nombres ficticios con la fábrica (Faker); en
+ *   producción solo la fila neutral «Por asignar», porque el expediente exige una
+ *   trabajadora social y la Casa carga su directorio real al instalar
+ *   (ver deploy/README.md).
  */
 class CatalogoSeeder extends Seeder
 {
@@ -68,7 +71,11 @@ class CatalogoSeeder extends Seeder
         }
 
         if (TrabajadorSocial::count() === 0) {
-            TrabajadorSocial::factory()->count(12)->create();
+            if (app()->environment('production')) {
+                TrabajadorSocial::firstOrCreate(['trabajador_social' => 'Por asignar']);
+            } else {
+                TrabajadorSocial::factory()->count(12)->create();
+            }
         }
     }
 }
