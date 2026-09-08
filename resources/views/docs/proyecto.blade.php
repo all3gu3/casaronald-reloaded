@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casita Digital | El proyecto</title>
+<title>Expediente Digital | El proyecto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
 <style>
@@ -119,7 +119,7 @@
 <header class="portada">
   <img class="logo" src="{{ asset('img/RMHC_Mexico_logo.png') }}" alt="Fundación Infantil Ronald McDonald México">
   <p class="eyebrow">Propuesta de donación tecnológica · Documento para la Dirección de la Casa</p>
-  <h1>Casita <span class="amarillo">Digital</span></h1>
+  <h1>Expediente <span class="amarillo">Digital</span></h1>
   <p class="bajada">Un sistema hecho a la medida de la operación diaria de la Casa Ronald McDonald: el expediente de cada familia, una credencial con código QR y el registro de cada servicio con un solo escaneo.</p>
   <span class="sello">Donación sin costo · sin licencias · sin condiciones</span>
 </header>
@@ -214,10 +214,10 @@
   <p>La Casa dedica su energía a las familias; este proyecto solo quiere devolverle unas horas a la semana para eso mismo.</p>
 </article>
 
-<div class="volver"><a href="{{ route('casita-secreta') }}">← Volver al índice de documentos</a></div>
+<div class="volver"><a href="{{ route('documentacion') }}">← Volver al índice de documentos</a></div>
 <footer>
   <p>Presentado por: [Nombre del presentador] · ex-voluntario de la Casa Ronald McDonald · Propuesta independiente, no es un documento oficial de la Fundación.<br>
-  Documento complementario: <a href="{{ route('casita-tecnico') }}">versión técnica para la Dirección de Tecnología</a>.</p>
+  Documento complementario: <a href="{{ route('documentacion-tecnico') }}">versión técnica para la Dirección de Tecnología</a>.</p>
 </footer>
 
 </div>

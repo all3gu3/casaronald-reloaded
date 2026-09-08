@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casita Digital | Guía del equipo</title>
+<title>Expediente Digital | Guía del equipo</title>
 <link rel="icon" href="{{ asset('favicon.ico') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -129,13 +129,13 @@
 <header class="portada">
   <img class="logo" src="{{ asset('img/RMHC_Mexico_logo.png') }}" alt="Fundación Infantil Ronald McDonald México">
   <p class="eyebrow">Para el equipo de la Casa Ronald McDonald</p>
-  <h1>Guía de la <span class="amarillo">Casita Digital</span></h1>
+  <h1>Guía del <span class="amarillo">Expediente Digital</span></h1>
   <p class="bajada">Todo lo que hace el sistema, contado como se usa: entrar, registrar a una familia, imprimir su credencial, escanear en cada servicio y sacar los números del mes. Sin tecnicismos y con las pantallas reales.</p>
 </header>
 
 <article>
   <h2>La idea, en una imagen</h2>
-  <p>La Casita Digital hace una sola cosa, bien: <strong>que cada familia se registre una vez</strong> y que a partir de ahí baste con escanear su credencial para dejar constancia de cada servicio que recibe. Lo que hoy son libretas, hojas sueltas y sumas a mano al final del mes, queda anotado solo.</p>
+  <p>El Expediente Digital hace una sola cosa, bien: <strong>que cada familia se registre una vez</strong> y que a partir de ahí baste con escanear su credencial para dejar constancia de cada servicio que recibe. Lo que hoy son libretas, hojas sueltas y sumas a mano al final del mes, queda anotado solo.</p>
 
   <figure>
     <div class="marco">
@@ -582,11 +582,11 @@
   </div>
 </article>
 
-<div class="volver"><a href="{{ route('casita-secreta') }}">← Volver al índice de documentos</a></div>
+<div class="volver"><a href="{{ route('documentacion') }}">← Volver al índice de documentos</a></div>
 
 <footer>
   <p>Guía preparada por: [Nombre del presentador] · ex-voluntario de la Casa Ronald McDonald · Documento independiente, no es un documento oficial de la Fundación.<br>
-  Documentos complementarios: <a href="{{ route('casita-proyecto') }}">el proyecto</a> (Dirección de la Casa) · <a href="{{ route('casita-tecnico') }}">diseño del sistema</a> y <a href="{{ route('casita-arquitectura') }}">modelo y arquitectura</a> (Dirección de Tecnología).</p>
+  Documento complementario: <a href="{{ route('documentacion-tecnico') }}">el documento técnico</a>, para la Dirección de Tecnología.</p>
 </footer>
 
 </div>

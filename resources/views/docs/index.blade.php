@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casita Digital | Documentos de propuesta</title>
+<title>Expediente Digital | Documentación</title>
 <link rel="icon" href="{{ asset('favicon.ico') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap">
@@ -84,25 +84,20 @@
 <body>
   <main class="panel">
     <img class="logo" src="{{ asset('img/RMHC_Mexico_logo.png') }}" alt="Fundación Infantil Ronald McDonald México">
-    <h1>Casita <span>Digital</span></h1>
-    <p class="sub">Propuesta y documentación del sistema de la Casa Ronald McDonald. Cuatro documentos complementarios, cada uno escrito para su lector.</p>
+    <h1>Expediente <span>Digital</span></h1>
+    <p class="sub">Documentación del sistema de expediente y servicios de la Casa Ronald McDonald. Tres documentos complementarios, cada uno escrito para su lector.</p>
     <div class="cards">
-      <a class="tarjeta dir" href="{{ route('casita-proyecto') }}">
+      <a class="tarjeta dir" href="{{ route('documentacion-proyecto') }}">
         <span class="tag">Para la Dirección de la Casa</span>
         <h2>El proyecto</h2>
         <p>Qué hace el sistema por las familias y por el equipo de la Casa, contado con los casos de uso del día a día: llegada, credencial, comedor, escuelita, lavandería, transporte y reportes. Sin tecnicismos.</p>
       </a>
-      <a class="tarjeta tec" href="{{ route('casita-tecnico') }}">
+      <a class="tarjeta tec" href="{{ route('documentacion-tecnico') }}">
         <span class="tag">Para la Dirección de Tecnología</span>
         <h2>El documento técnico</h2>
-        <p>El mismo proyecto visto por dentro: arquitectura, modelo de datos, contrato de API, estado actual honesto del prototipo y el plan de endurecimiento antes de operar con datos reales.</p>
+        <p>El sistema por dentro, tal como está hoy: alcance funcional, modelo de datos tabla por tabla, diagrama de clases, la infraestructura sobre la que corre, los casos de uso con sus flujos y los términos de la donación.</p>
       </a>
-      <a class="tarjeta tec" href="{{ route('casita-arquitectura') }}">
-        <span class="tag">Para la Dirección de Tecnología</span>
-        <h2>Modelo y arquitectura</h2>
-        <p>La documentación del sistema tal como está hoy: modelo de datos tabla por tabla, diagrama de clases, la infraestructura sobre la que corre y el catálogo completo de casos de uso con sus flujos.</p>
-      </a>
-      <a class="tarjeta eq" href="{{ route('casita-guia') }}">
+      <a class="tarjeta eq" href="{{ route('documentacion-guia') }}">
         <span class="tag">Para el equipo de la Casa</span>
         <h2>Guía del equipo</h2>
         <p>Cómo se usa el sistema, paso a paso y con las pantallas reales: entrar, registrar a una familia, imprimir su credencial, escanear en cada servicio y sacar los números del mes.</p>

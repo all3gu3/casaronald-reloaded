@@ -12,12 +12,21 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Documentos de propuesta (ruta escondida, pública: no contienen datos de familias)
-Route::view('/casita-secreta', 'docs.index')->name('casita-secreta');
-Route::view('/casita-secreta/proyecto', 'docs.proyecto')->name('casita-proyecto');
-Route::view('/casita-secreta/tecnico', 'docs.tecnico')->name('casita-tecnico');
-Route::view('/casita-secreta/arquitectura', 'docs.arquitectura')->name('casita-arquitectura');
-Route::view('/casita-secreta/guia', 'docs.guia')->name('casita-guia');
+// Documentación del sistema (pública: no contiene datos de familias)
+Route::prefix('documentacion-expediente')->group(function () {
+    Route::view('/', 'docs.index')->name('documentacion');
+    Route::view('/proyecto', 'docs.proyecto')->name('documentacion-proyecto');
+    Route::view('/tecnico', 'docs.tecnico')->name('documentacion-tecnico');
+    Route::view('/guia', 'docs.guia')->name('documentacion-guia');
+    Route::redirect('/arquitectura', '/documentacion-expediente/tecnico');
+});
+
+// Las URL viejas siguen funcionando: se compartieron antes del renombre
+Route::redirect('/casita-secreta', '/documentacion-expediente');
+Route::redirect('/casita-secreta/proyecto', '/documentacion-expediente/proyecto');
+Route::redirect('/casita-secreta/tecnico', '/documentacion-expediente/tecnico');
+Route::redirect('/casita-secreta/arquitectura', '/documentacion-expediente/tecnico');
+Route::redirect('/casita-secreta/guia', '/documentacion-expediente/guia');
 
 // Autenticación
 Route::middleware('guest')->group(function () {
