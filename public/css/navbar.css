@@ -1,0 +1,248 @@
+/* Barra de navegación superior.
+   Blanco como color principal; acentos de la paleta de la organización:
+   rojo #F64740, amarillo #FFC72C, azul #38598A. */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-bottom: 3px solid #F64740;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    padding: 8px 20px;
+    font-family: raleway, 'Open Sans', sans-serif;
+}
+
+.topbar-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 18px;
+}
+
+.topbar-logo img {
+    height: 46px;
+    width: auto;
+    display: block;
+}
+
+/* Los enlaces van a la izquierda, junto al logo; el espacio libre queda
+   entre ellos y el menú del usuario, pegado a la derecha. */
+.topbar-enlaces {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Todos los botones comparten la forma de pastilla del de Escanear. */
+.topbar-enlace {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #38598A;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.topbar-enlace:hover {
+    background: #EEF3FA;
+    color: #22345C;
+    text-decoration: none;
+}
+
+.topbar-enlace.activo {
+    background: #EEF3FA;
+    color: #22345C;
+    box-shadow: inset 0 -3px 0 #F64740;
+}
+
+/* El botón de escanear resalta en amarillo y abre la ventana flotante. */
+.topbar-escanear {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FFC72C;
+    border: none;
+    color: #5c4500;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(255, 199, 44, 0.5);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.topbar-escanear:hover {
+    background: #F0B400;
+    color: #4a3700;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.topbar-escanear.activo {
+    box-shadow: 0 2px 6px rgba(255, 199, 44, 0.5), inset 0 -3px 0 #5c4500;
+}
+
+/* Administración y menú del usuario, empujados al extremo derecho. */
+.topbar-derecha {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+}
+
+/* Dropdown del usuario: el disparador es su nombre en rojo. */
+.topbar-usuario {
+    position: relative;
+}
+
+.topbar-usuario-boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #F64740;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.topbar-usuario-boton:hover,
+.topbar-usuario.abierto .topbar-usuario-boton {
+    background: #FDECEB;
+    color: #D22E27;
+}
+
+.topbar-usuario-caret {
+    font-size: 13px;
+    transition: transform 0.2s;
+}
+
+.topbar-usuario.abierto .topbar-usuario-caret {
+    transform: rotate(180deg);
+}
+
+.topbar-usuario-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 200px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    padding: 6px;
+    z-index: 1040;
+}
+
+.topbar-usuario.abierto .topbar-usuario-menu {
+    display: block;
+}
+
+.topbar-usuario-opcion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #38598A;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 9px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.topbar-usuario-opcion:hover {
+    background: #EEF3FA;
+    color: #22345C;
+    text-decoration: none;
+}
+
+.topbar-usuario-salir {
+    color: #F64740;
+}
+
+.topbar-usuario-salir:hover {
+    background: #FDECEB;
+    color: #D22E27;
+}
+
+.topbar-hamburguesa {
+    display: none;
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #38598A;
+    font-size: 22px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .topbar-hamburguesa {
+        display: block;
+    }
+
+    .topbar-enlaces {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        background: #fff;
+        padding: 10px 14px 14px;
+        border-bottom: 3px solid #F64740;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+    }
+
+    .topbar-enlaces.abierto {
+        display: flex;
+    }
+
+    .topbar-escanear {
+        justify-content: center;
+    }
+
+    .topbar-derecha {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        margin-left: 0;
+        margin-top: 4px;
+        border-top: 1px solid #EEF3FA;
+        padding-top: 8px;
+    }
+
+    /* En el menú plegado el dropdown se despliega en línea, a lo ancho. */
+    .topbar-usuario-boton {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .topbar-usuario-menu {
+        position: static;
+        min-width: 0;
+        box-shadow: none;
+        padding: 0 0 0 12px;
+    }
+}

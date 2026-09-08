@@ -1,0 +1,9 @@
+[Unit]
+Description=Respaldo de Casa Ronald (base de datos y archivos)
+After=mariadb.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/casaronald-backup
+Nice=10
+IOSchedulingClass=idle

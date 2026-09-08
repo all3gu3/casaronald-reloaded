@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Sin foto">
+  <!-- Avatar de reserva para acompañantes y demás adultos sin foto: misma
+       silueta que el avatar del niño pero con proporciones adultas (cabeza
+       menor, hombros anchos) sobre el azul claro de la paleta. -->
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3F7FC"/>
+      <stop offset="1" stop-color="#D8E5F4"/>
+    </linearGradient>
+    <linearGradient id="figura" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4A6B9D"/>
+      <stop offset="1" stop-color="#22345C"/>
+    </linearGradient>
+    <clipPath id="marco">
+      <circle cx="100" cy="100" r="100"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#marco)">
+    <rect width="200" height="200" fill="url(#fondo)"/>
+    <!-- Destellos suaves para que el fondo no se sienta plano -->
+    <circle cx="162" cy="38" r="26" fill="#FFFFFF" opacity="0.45"/>
+    <circle cx="34" cy="58" r="16" fill="#FFFFFF" opacity="0.35"/>
+    <!-- Cabeza y hombros -->
+    <circle cx="100" cy="82" r="30" fill="url(#figura)"/>
+    <path d="M100 122 C 64 122 39 147 36 180 L 36 202 L 164 202 L 164 180 C 161 147 136 122 100 122 Z" fill="url(#figura)"/>
+  </g>
+</svg>

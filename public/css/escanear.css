@@ -1,0 +1,429 @@
+/* Ventana flotante de escaneo. Sigue la paleta de la barra:
+   rojo #F64740, amarillo #FFC72C, azul #38598A; verde #28A745 para éxito. */
+
+/* Los pasos y el velo se muestran/ocultan con el atributo hidden; este
+   comodín evita que los display propios (flex, grid) lo pisen. */
+.escaneo-velo[hidden],
+.escaneo-velo [hidden] {
+    display: none !important;
+}
+
+.escaneo-velo {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 6vh 16px 16px;
+    background: rgba(15, 23, 42, 0.55);
+    overflow-y: auto;
+}
+
+body.escaneo-abierto {
+    overflow: hidden;
+}
+
+.escaneo-ventana {
+    width: 100%;
+    max-width: 430px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+    padding: 18px 20px 20px;
+    font-family: raleway, 'Open Sans', sans-serif;
+}
+
+.escaneo-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.escaneo-cabecera strong {
+    color: #38598A;
+    font-size: 17px;
+}
+
+.escaneo-cabecera strong i {
+    margin-right: 6px;
+}
+
+.escaneo-cerrar {
+    background: none;
+    border: none;
+    color: #98a4b8;
+    font-size: 26px;
+    line-height: 1;
+    padding: 0 4px;
+    cursor: pointer;
+}
+
+.escaneo-cerrar:hover {
+    color: #F64740;
+}
+
+.escaneo-guia {
+    color: #6c7a90;
+    margin-bottom: 10px;
+}
+
+/* --- Paso 1: servicios arriba (fila de 4), entrada/salida abajo -------- */
+.escaneo-servicios {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.escaneo-servicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 72px;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 12.5px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    transition: filter 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+.escaneo-servicio i {
+    font-size: 20px;
+}
+
+.escaneo-servicio:hover {
+    filter: brightness(0.94);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+}
+
+/* Entrada y salida: fila propia con botones anchos. */
+.escaneo-movimientos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.escaneo-movimientos .escaneo-servicio {
+    flex-direction: row;
+    gap: 8px;
+    min-height: 52px;
+    font-size: 14px;
+}
+
+.escaneo-movimientos .escaneo-servicio i {
+    font-size: 17px;
+}
+
+/* Paleta: los mismos colores por servicio del gráfico de administración;
+   entrada en verde y salida en rojo. El color sigue al servicio, nunca a
+   su posición, y el chip del paso 2 lo hereda. */
+.escaneo-chip[data-accion] {
+    color: #fff;
+}
+
+.escaneo-servicio[data-accion="lavanderia"],
+.escaneo-chip[data-accion="lavanderia"] {
+    background: #2a78d6;
+}
+
+.escaneo-servicio[data-accion="comedor"],
+.escaneo-chip[data-accion="comedor"] {
+    background: #eb6834;
+}
+
+.escaneo-servicio[data-accion="escuela"],
+.escaneo-chip[data-accion="escuela"] {
+    background: #1baf7a;
+}
+
+/* Ámbar con texto oscuro, como los botones amarillos del sistema. */
+.escaneo-servicio[data-accion="transporte"],
+.escaneo-chip[data-accion="transporte"] {
+    background: #eda100;
+    color: #4a3700;
+}
+
+.escaneo-servicio[data-accion="entrada"],
+.escaneo-chip[data-accion="entrada"] {
+    background: #28a745;
+}
+
+.escaneo-servicio[data-accion="salida"],
+.escaneo-chip[data-accion="salida"] {
+    background: #F64740;
+}
+
+/* En pantallas muy angostas la fila de 4 no cabe: pasa a 2×2. */
+@media screen and (max-width: 380px) {
+    .escaneo-servicios {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* --- Paso 2: servicio elegido + cámara + captura manual ---------------- */
+.escaneo-seleccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.escaneo-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #EEF3FA;
+    color: #22345C;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 7px 14px;
+    border-radius: 999px;
+}
+
+.escaneo-cambiar {
+    background: none;
+    border: none;
+    color: #38598A;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.escaneo-cambiar:hover {
+    color: #F64740;
+}
+
+.escaneo-marco {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: #0f172a;
+    min-height: 130px;
+}
+
+/* Spinner verde de confirmación sobre la cámara: primero el anillo girando
+   y, cuando la cámara ya se apagó, la palomita. */
+.escaneo-exito {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.94);
+    color: #1e7e34;
+    font-weight: 700;
+}
+
+.escaneo-exito p {
+    margin: 0;
+}
+
+.escaneo-exito-anillo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 4px solid rgba(40, 167, 69, 0.25);
+    border-top-color: #28a745;
+    animation: escaneo-girar 0.7s linear infinite;
+}
+
+@keyframes escaneo-girar {
+    to { transform: rotate(360deg); }
+}
+
+.escaneo-exito-check {
+    display: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #28a745;
+    color: #fff;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.escaneo-exito.listo .escaneo-exito-anillo {
+    display: none;
+}
+
+.escaneo-exito.listo .escaneo-exito-check {
+    display: flex;
+}
+
+.escaneo-btn-camara {
+    display: block;
+    width: 100%;
+    background: #FFC72C;
+    color: #5c4500;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.escaneo-btn-camara:hover {
+    background: #F0B400;
+}
+
+.escaneo-aviso {
+    display: block;
+    color: #6c7a90;
+    margin-top: 6px;
+}
+
+.escaneo-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.escaneo-codigo {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #d7e0ee;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #22345C;
+}
+
+.escaneo-codigo:focus {
+    outline: none;
+    border-color: #38598A;
+    box-shadow: 0 0 0 3px rgba(56, 89, 138, 0.15);
+}
+
+.escaneo-registrar {
+    background: #38598A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 9px 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.escaneo-registrar:hover {
+    background: #22345C;
+}
+
+.escaneo-registrar:disabled {
+    opacity: 0.65;
+    cursor: default;
+}
+
+.escaneo-error {
+    margin-top: 12px;
+    background: #FDECEB;
+    color: #D22E27;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+/* --- Paso 3: confirmación del registro --------------------------------- */
+.escaneo-confirmacion {
+    text-align: center;
+}
+
+.escaneo-confirmacion-icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #E6F6EA;
+    color: #28a745;
+    font-size: 28px;
+    margin: 6px 0 12px;
+}
+
+.escaneo-confirmacion h5 {
+    color: #1e7e34;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.escaneo-res-nino {
+    font-weight: 700;
+    color: #22345C;
+    margin-bottom: 4px;
+}
+
+.escaneo-res-detalle {
+    color: #4a5a72;
+    margin-bottom: 4px;
+}
+
+.escaneo-res-alergias {
+    color: #D22E27;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.escaneo-confirmacion-acciones {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.escaneo-otro,
+.escaneo-terminar {
+    flex: 1;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.escaneo-otro {
+    background: #fff;
+    border: 1px solid #38598A;
+    color: #38598A;
+}
+
+.escaneo-otro:hover {
+    background: #EEF3FA;
+}
+
+.escaneo-terminar {
+    background: #38598A;
+    border: none;
+    color: #fff;
+}
+
+.escaneo-terminar:hover {
+    background: #22345C;
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=Respaldo diario de Casa Ronald a las 03:15
+
+[Timer]
+OnCalendar=*-*-* 03:15:00
+RandomizedDelaySec=10min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

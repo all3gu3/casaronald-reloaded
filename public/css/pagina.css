@@ -1,0 +1,1295 @@
+/* Páginas interiores con la misma familia visual que la portada (inicio.css):
+   tarjeta blanca redondeada sobre el fondo azul, encabezado centrado con el
+   acento rojo y botones de la paleta de la barra superior. Todo va bajo el
+   envoltorio .pagina para no tocar las páginas que aún usan el estilo viejo. */
+
+.pagina {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+}
+
+.pagina-tarjeta {
+    max-width: 1100px;
+    margin: 10px auto 48px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+/* --- Encabezado ------------------------------------------------------- */
+
+.pagina-encabezado {
+    padding: 32px 28px 4px;
+    text-align: center;
+}
+
+.pagina-encabezado h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #22345C;
+    margin-bottom: 10px;
+}
+
+.pagina-acento {
+    width: 64px;
+    height: 4px;
+    margin: 0 auto 4px;
+    border: none;
+    border-radius: 2px;
+    background: #F64740;
+}
+
+.pagina-sub {
+    text-align: center;
+    color: #8A94A6;
+    font-size: 15px;
+    margin: 10px 0 0;
+}
+
+.pagina-cuerpo {
+    padding: 18px 28px 30px;
+}
+
+/* Tarjeta que abre la página sin encabezado propio: un poco más de aire
+   arriba para que el título de la sección no quede pegado al borde. */
+.pagina-cuerpo-primero {
+    padding-top: 28px;
+}
+
+/* --- Acciones --------------------------------------------------------- */
+
+.pagina-acciones {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+
+.pagina-boton-primario {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFC72C;
+    border: none;
+    color: #5c4500;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 11px 24px;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(255, 199, 44, 0.5);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.pagina-boton-primario:hover {
+    background: #F0B400;
+    color: #4a3700;
+    transform: translateY(-1px);
+}
+
+/* --- Tabla ------------------------------------------------------------ */
+
+.pagina-tarjeta table.data-table {
+    width: 100% !important;
+    color: #22345C;
+    margin-bottom: 12px;
+}
+
+.pagina-tarjeta table.data-table thead th {
+    background: #EEF3FA;
+    color: #22345C;
+    font-weight: 700;
+    border: none;
+    border-bottom: 2px solid #d9e4f2;
+    white-space: nowrap;
+}
+
+.pagina-tarjeta table.data-table tbody td {
+    border-top: 1px solid #E7ECF3;
+    vertical-align: middle;
+}
+
+.pagina-tarjeta table.data-table tbody tr:hover {
+    background: #F7FAFD;
+}
+
+/* Controles de DataTables (buscador, paginación, conteo). */
+.pagina-tarjeta .dataTables_length,
+.pagina-tarjeta .dataTables_filter,
+.pagina-tarjeta .dataTables_info {
+    color: #8A94A6;
+    font-size: 14px;
+}
+
+.pagina-tarjeta .dataTables_filter input,
+.pagina-tarjeta .dataTables_length select {
+    border: 1px solid #E7ECF3;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #22345C;
+}
+
+.pagina-tarjeta .dataTables_filter input:focus,
+.pagina-tarjeta .dataTables_length select:focus {
+    outline: none;
+    border-color: #38598A;
+    box-shadow: 0 0 0 2px rgba(56, 89, 138, 0.15);
+}
+
+.pagina-tarjeta .page-link {
+    color: #38598A;
+    border-color: #E7ECF3;
+}
+
+.pagina-tarjeta .page-item.active .page-link {
+    background: #38598A;
+    border-color: #38598A;
+    color: #fff;
+}
+
+/* Botones de acción por fila: mismos colores que la paleta de la barra.
+   Se anulan los márgenes sueltos que style.css les daba globalmente. */
+.pagina-tarjeta .verr,
+.pagina-tarjeta .agregarr,
+.pagina-tarjeta .fichita,
+.pagina .modal .verr,
+.pagina .modal .agregarr {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    margin: 0 3px;
+    border-radius: 10px;
+}
+
+.pagina-tarjeta .verr,
+.pagina .modal .verr {
+    background: #38598A;
+    color: #fff;
+}
+
+.pagina-tarjeta .verr:hover,
+.pagina .modal .verr:hover {
+    background: #22345C;
+    color: #fff;
+}
+
+.pagina-tarjeta .agregarr,
+.pagina .modal .agregarr {
+    background: #FFC72C;
+    color: #5c4500;
+}
+
+.pagina-tarjeta .agregarr:hover,
+.pagina .modal .agregarr:hover {
+    background: #F0B400;
+    color: #4a3700;
+}
+
+.pagina-tarjeta .fichita {
+    background: #EEF3FA;
+    color: #22345C;
+    border: 1px solid #d9e4f2;
+}
+
+.pagina-tarjeta .fichita:hover {
+    background: #d9e4f2;
+    color: #22345C;
+}
+
+/* --- Modales ---------------------------------------------------------- */
+
+.pagina .modal-content {
+    border: none;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+.pagina .modal-header {
+    background: #EEF3FA;
+    border-bottom: 3px solid #F64740;
+    padding: 16px 22px;
+}
+
+.pagina .modal-header .modal-title {
+    color: #22345C;
+    font-weight: 700;
+    font-size: 19px;
+}
+
+.pagina .modal-header .close {
+    color: #38598A;
+    opacity: 1;
+}
+
+.pagina .modal-footer {
+    border-top: 1px solid #E7ECF3;
+    color: #8A94A6;
+}
+
+/* El botón amarillo de guardar/descargar de los modales, como píldora. */
+.pagina .botoncito {
+    background: #FFC72C;
+    color: #5c4500;
+    font-weight: 700;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 22px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.pagina .botoncito:hover {
+    background: #F0B400;
+    color: #4a3700;
+}
+
+/* --- Modal de expediente (consulta de solo lectura) -------------------- */
+
+.expediente-encabezado {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 6px;
+}
+
+.expediente-encabezado h4 {
+    color: #22345C;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.expediente-foto {
+    width: 84px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #d9e4f2;
+}
+
+.expediente-sub {
+    color: #8A94A6;
+    margin: 0;
+}
+
+/* Encabezado de sección compartido por los modales de consulta y captura. */
+.modal-seccion {
+    margin-top: 18px;
+}
+
+/* :first-of-type y no :first-child — el primer hijo del formulario es el
+   input oculto del CSRF. */
+.modal-seccion:first-of-type {
+    margin-top: 0;
+}
+
+.modal-seccion h5 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #22345C;
+    background: #EEF3FA;
+    border-left: 3px solid #F64740;
+    padding: 6px 10px;
+    margin-bottom: 10px;
+}
+
+.expediente-campos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px 16px;
+    padding: 0 4px;
+}
+
+.expediente-campos small {
+    display: block;
+    color: #8A94A6;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.expediente-campos span {
+    color: #22345C;
+    font-size: 14.5px;
+}
+
+.expediente-observaciones {
+    color: #22345C;
+    padding: 0 4px;
+    margin: 0;
+}
+
+/* --- Formulario de solicitud (alta y edición) -------------------------- */
+
+.formulario-campos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 16px;
+    padding: 0 4px;
+}
+
+.formulario-campos .campo-2 {
+    grid-column: span 2;
+}
+
+.formulario-campos .campo-3 {
+    grid-column: 1 / -1;
+}
+
+.formulario-campos label {
+    display: block;
+    color: #8A94A6;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 4px;
+}
+
+.formulario-campos .form-control {
+    border: 1px solid #d9e4f2;
+    border-radius: 8px;
+    color: #22345C;
+    height: auto;
+    padding: 7px 10px;
+}
+
+.formulario-campos .form-control:focus {
+    border-color: #38598A;
+    box-shadow: 0 0 0 3px rgba(56, 89, 138, 0.12);
+}
+
+.formulario-campos textarea.form-control {
+    resize: vertical;
+}
+
+.formulario-nota {
+    display: block;
+    color: #8A94A6;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* Campo de foto: el selector de archivo y el botón de cámara en una fila que
+   se parte en dos renglones cuando la pantalla es angosta. */
+.foto-campo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.foto-campo-archivo {
+    flex: 1 1 180px;
+    min-width: 0;
+    font-size: 14px;
+}
+
+.foto-campo-camara {
+    flex: 0 0 auto;
+    padding: 7px 16px;
+    font-size: 13.5px;
+}
+
+.formulario-foto-previa {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 12px;
+}
+
+.formulario-foto-previa[src=""] {
+    display: none;
+}
+
+/* Cámara en la página. Se abre encima del modal del expediente (Bootstrap usa
+   1050), de ahí el z-index alto. */
+.camara-velo[hidden],
+.camara-velo [hidden] {
+    display: none !important;
+}
+
+.camara-velo {
+    position: fixed;
+    inset: 0;
+    z-index: 1080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(15, 23, 42, 0.72);
+    overflow-y: auto;
+}
+
+body.camara-abierta {
+    overflow: hidden;
+}
+
+.camara-ventana {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    padding: 16px 18px 18px;
+}
+
+.camara-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.camara-cabecera strong {
+    color: #22345C;
+    font-size: 17px;
+}
+
+.camara-cabecera i {
+    margin-right: 6px;
+    color: #38598A;
+}
+
+.camara-cerrar {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #38598A;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.camara-cerrar:hover {
+    opacity: 0.75;
+}
+
+/* Cuadrado: el recorte de la captura es el mismo que se ve aquí. */
+.camara-marco {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0F172A;
+}
+
+.camara-marco video,
+.camara-marco img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* La cámara frontal se ve en espejo, como cualquier selfie; la foto guardada
+   conserva la orientación real. */
+.camara-marco video.camara-espejo {
+    transform: scaleX(-1);
+}
+
+.camara-encendiendo {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+    color: #EEF3FA;
+    font-weight: 600;
+}
+
+.camara-guia {
+    color: #6c7a90;
+    font-size: 13px;
+    text-align: center;
+    margin: 10px 0 12px;
+}
+
+.camara-acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.camara-btn {
+    flex: 1 1 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.camara-btn:hover {
+    filter: brightness(0.94);
+}
+
+.camara-btn-disparo {
+    background: #38598A;
+    color: #fff;
+}
+
+.camara-btn-usar {
+    background: #28A745;
+    color: #fff;
+}
+
+/* El secundario solo pide su ancho: así «Cambiar cámara» no se parte en dos
+   renglones en el teléfono y «Capturar» se queda con el resto. */
+.camara-btn-secundario {
+    flex: 0 1 auto;
+    background: #EEF3FA;
+    color: #38598A;
+}
+
+/* Radios y checkboxes como pastillas: el input queda oculto pero accesible
+   (el foco del teclado se dibuja sobre la etiqueta). */
+.formulario-opciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 2px 0;
+}
+
+.formulario-opciones input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.formulario-opciones label {
+    margin: 0;
+    padding: 6px 16px;
+    border: 1px solid #d9e4f2;
+    border-radius: 999px;
+    color: #38598A;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.formulario-opciones input:not(:checked) + label:hover {
+    background: #EEF3FA;
+}
+
+.formulario-opciones input:checked + label {
+    background: #22345C;
+    border-color: #22345C;
+    color: #fff;
+}
+
+.formulario-opciones input:focus-visible + label {
+    box-shadow: 0 0 0 3px rgba(56, 89, 138, 0.25);
+}
+
+/* Celda del botón de envío cuando el formulario vive en una rejilla. */
+.formulario-accion {
+    display: flex;
+    align-items: flex-end;
+}
+
+/* Deslizador socioeconómico con su valor al lado. */
+.formulario-rango {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.formulario-rango input[type="range"] {
+    flex: 1;
+    border: none;
+    padding: 0;
+    accent-color: #F64740;
+    box-shadow: none;
+}
+
+.formulario-rango output {
+    min-width: 34px;
+    text-align: center;
+    background: #EEF3FA;
+    color: #22345C;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 4px 0;
+}
+
+@media (max-width: 640px) {
+    .expediente-campos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .formulario-campos {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario-campos .campo-2 {
+        grid-column: auto;
+    }
+}
+
+/* --- Página individual del niño ---------------------------------------- */
+
+/* El nombre del niño como enlace a su página, en cualquier tabla. */
+.enlace-nino {
+    color: #38598A;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.enlace-nino:hover {
+    color: #22345C;
+    text-decoration: underline;
+}
+
+.perfil-foto {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #EEF3FA;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    margin-bottom: 14px;
+}
+
+/* Las descargas van centradas y los enlaces-botón no se subrayan. */
+.perfil-acciones {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.perfil-acciones a {
+    text-decoration: none;
+}
+
+/* Descargas en el azul del fondo de la página; editar en amarillo. */
+.bitacora-ver.perfil-boton-descarga {
+    background: #4872AE;
+    border-color: #4872AE;
+    color: #fff;
+}
+
+.bitacora-ver.perfil-boton-descarga:hover {
+    background: #38598A;
+    border-color: #38598A;
+    color: #fff;
+}
+
+.bitacora-ver.perfil-boton-editar {
+    background: #FFC72C;
+    border-color: #FFC72C;
+    color: #5c4500;
+}
+
+.bitacora-ver.perfil-boton-editar:hover {
+    background: #F0B400;
+    border-color: #F0B400;
+    color: #4a3700;
+}
+
+/* --- Vista previa de descargas (compartida: perfil y expedientes) ------- */
+
+/* El carnet ahora es vertical (proporción carta): el diálogo es angosto. */
+.preview-dialog {
+    max-width: 700px;
+}
+
+/* Botón de cierre flotante en la esquina superior izquierda del diálogo. */
+/* Mismo tache que el encabezado de los demás modales (.modal-header .close),
+   pero flotando sobre el carnet: esta ventana no tiene encabezado. */
+.preview-cerrar-x {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    z-index: 5;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #38598A;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 1;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.preview-cerrar-x:hover {
+    opacity: 0.75;
+}
+
+.preview-cuerpo {
+    background: #EEF3FA;
+    padding: 14px;
+    text-align: center;
+}
+
+.preview-cargando {
+    color: #38598A;
+    font-weight: 600;
+    margin: 0;
+    padding: 120px 0;
+}
+
+.preview-cuerpo iframe {
+    width: 100%;
+    height: 70vh;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.preview-cuerpo img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Pie del modal: las descargas azules centradas y "Cerrar" a la derecha. */
+.preview-pie {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-top: 1px solid #E7ECF3;
+}
+
+.preview-pie .preview-cerrar {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* En pantallas angostas "Cerrar" entra a la fila para no encimarse. */
+@media (max-width: 575px) {
+    .preview-pie .preview-cerrar {
+        position: static;
+        transform: none;
+    }
+}
+
+/* --- Bitácora (portada de registros) ----------------------------------- */
+
+.bitacora-seccion + .bitacora-seccion {
+    margin-top: 34px;
+    padding-top: 28px;
+    border-top: 1px solid #E7ECF3;
+}
+
+.bitacora-encabezado {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.bitacora-encabezado h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #22345C;
+    margin: 0;
+}
+
+.bitacora-encabezado h2 i {
+    color: #38598A;
+}
+
+.bitacora-sub {
+    color: #8A94A6;
+    font-size: 14px;
+    margin: -4px 0 14px;
+}
+
+/* También se usa como <button> (p. ej. "Editar expediente" en el perfil). */
+.bitacora-ver {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #d9e4f2;
+    color: #38598A;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.bitacora-ver:hover {
+    background: #EEF3FA;
+    color: #22345C;
+    text-decoration: none;
+}
+
+.bitacora-vacio {
+    text-align: center;
+    color: #8A94A6;
+    padding: 16px 0;
+    margin: 0;
+}
+
+.bitacora-badge {
+    display: inline-block;
+    background: #E8F7EF;
+    color: #1E7E4C;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 999px;
+}
+
+.bitacora-badge.badge-inactiva {
+    background: #EEF3FA;
+    color: #8A94A6;
+}
+
+/* --- Acciones de las cuentas del personal ------------------------------ */
+
+/* La celda apila la contraseña arriba y el alta/baja de la cuenta abajo. */
+.cuenta-acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.cuenta-password {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cuenta-password-campo {
+    width: 150px;
+    border: 1px solid #d9e4f2;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13.5px;
+    color: #22345C;
+    background: #fff;
+}
+
+.cuenta-password-campo:focus {
+    outline: none;
+    border-color: #38598A;
+    box-shadow: 0 0 0 3px rgba(56, 89, 138, 0.12);
+}
+
+/* Botones tipo píldora, con aire suficiente para leerse dentro de la tabla. */
+.cuenta-boton {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.cuenta-boton-neutro {
+    background: #EEF3FA;
+    border-color: #d9e4f2;
+    color: #38598A;
+}
+
+.cuenta-boton-neutro:hover {
+    background: #E1EAF6;
+    border-color: #c7d8ec;
+}
+
+/* Baja: la cuenta está activa y el botón la desactiva. */
+.cuenta-boton-baja {
+    background: #FDECEB;
+    border-color: #F7C9C6;
+    color: #B3352E;
+}
+
+.cuenta-boton-baja:hover {
+    background: #F9DAD8;
+    border-color: #F0B0AC;
+}
+
+/* Alta: la cuenta está desactivada y el botón la reactiva. */
+.cuenta-boton-alta {
+    background: #E8F7EF;
+    border-color: #BFE7D2;
+    color: #1E7E4C;
+}
+
+.cuenta-boton-alta:hover {
+    background: #D8F0E3;
+    border-color: #A8DCC1;
+}
+
+/* Filtro por usuario de la bitácora de actividad. */
+.filtro-usuario {
+    max-width: 260px;
+    border: 1px solid #d9e4f2;
+    border-radius: 999px;
+    color: #22345C;
+    height: auto;
+    padding: 7px 14px;
+}
+
+.filtro-usuario:focus {
+    border-color: #38598A;
+    box-shadow: 0 0 0 3px rgba(56, 89, 138, 0.12);
+}
+
+/* Un panel de vista previa por servicio, en rejilla de dos columnas. */
+.bitacora-servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 6px;
+}
+
+.bitacora-panel {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E7ECF3;
+    border-radius: 12px;
+    padding: 18px 20px 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.bitacora-panel-titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #22345C;
+    margin: 0 0 12px;
+}
+
+.bitacora-panel-titulo i {
+    color: #38598A;
+    font-size: 22px;
+}
+
+/* Colores por servicio: los mismos de la ventana de escaneo y del gráfico
+   de administración. El color sigue al servicio, nunca a su posición. */
+.bitacora-panel[data-servicio="lavanderia"] {
+    border-top: 3px solid #2a78d6;
+}
+
+.bitacora-panel[data-servicio="lavanderia"] .bitacora-panel-titulo i {
+    color: #2a78d6;
+}
+
+.bitacora-panel[data-servicio="comedor"] {
+    border-top: 3px solid #eb6834;
+}
+
+.bitacora-panel[data-servicio="comedor"] .bitacora-panel-titulo i {
+    color: #eb6834;
+}
+
+.bitacora-panel[data-servicio="escuela"] {
+    border-top: 3px solid #1baf7a;
+}
+
+.bitacora-panel[data-servicio="escuela"] .bitacora-panel-titulo i {
+    color: #1baf7a;
+}
+
+.bitacora-panel[data-servicio="transporte"] {
+    border-top: 3px solid #eda100;
+}
+
+.bitacora-panel[data-servicio="transporte"] .bitacora-panel-titulo i {
+    color: #eda100;
+}
+
+/* Entradas y salidas: verde y rojo, como en la ventana de escaneo.
+   (Con la especificidad suficiente para ganarle al color base de los th.) */
+.pagina-tarjeta table.data-table thead th.bitacora-th-entrada {
+    color: #28a745;
+}
+
+.pagina-tarjeta table.data-table thead th.bitacora-th-salida {
+    color: #F64740;
+}
+
+/* Código de la credencial (el mismo del QR) en las tablas de la bitácora. */
+.bitacora-codigo {
+    font-family: SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #38598A;
+    background: #EEF3FA;
+    padding: 2px 8px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+}
+
+.bitacora-panel .data-table {
+    font-size: 14.5px;
+    margin-bottom: 8px;
+}
+
+.bitacora-panel .bitacora-vacio {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bitacora-panel-pie {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding-top: 6px;
+}
+
+@media (max-width: 640px) {
+    .pagina-tarjeta {
+        margin-bottom: 28px;
+        border-radius: 10px;
+    }
+
+    .bitacora-servicios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pagina-cuerpo {
+        padding: 14px 14px 22px;
+    }
+
+    .pagina-acciones {
+        justify-content: center;
+    }
+}
+
+/* --- Reportes de servicios (administración) ---------------------------- */
+
+.reportes-controles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+/* Botonera segmentada de bloques de tiempo: Hoy / Semana / Mes / Año / Todo. */
+.reportes-bloques {
+    display: inline-flex;
+    background: #EEF3FA;
+    border-radius: 999px;
+    padding: 4px;
+    gap: 2px;
+}
+
+.reportes-bloque {
+    border: none;
+    background: transparent;
+    color: #38598A;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 7px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.reportes-bloque:hover {
+    background: rgba(56, 89, 138, 0.1);
+}
+
+.reportes-bloque.activo {
+    background: #22345C;
+    color: #fff;
+}
+
+/* Rango de fechas específico. */
+.reportes-rango {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reportes-rango label {
+    margin: 0;
+    color: #8A94A6;
+    font-size: 14px;
+}
+
+.reportes-rango input[type="date"] {
+    width: auto;
+    border: 1px solid #d9e4f2;
+    border-radius: 999px;
+    color: #22345C;
+    height: auto;
+    padding: 6px 14px;
+    font-size: 14px;
+}
+
+.reportes-rango input[type="date"]:focus {
+    border-color: #38598A;
+    box-shadow: 0 0 0 3px rgba(56, 89, 138, 0.12);
+}
+
+.reportes-aplicar {
+    border: 1px solid #d9e4f2;
+    background: #fff;
+    color: #38598A;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 7px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.reportes-aplicar:hover {
+    background: #EEF3FA;
+    color: #22345C;
+}
+
+.reportes-resumen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.reportes-descripcion {
+    color: #8A94A6;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Verde de descarga: se separa del amarillo de las acciones primarias para
+   que la salida del reporte se distinga de los botones de alta. */
+.reportes-excel {
+    font-size: 14px;
+    padding: 9px 20px;
+    text-decoration: none;
+    background: #1E7E4C;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(30, 126, 76, 0.4);
+}
+
+.reportes-excel:hover {
+    text-decoration: none;
+    background: #186640;
+    color: #fff;
+}
+
+/* Totales del periodo: el número visible por servicio complementa al color
+   del gráfico (los tonos claros no dependen solo del contraste). */
+.reportes-kpis {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.reportes-kpi {
+    background: #F7F9FC;
+    border: 1px solid #E7ECF3;
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.reportes-kpi-total {
+    background: #22345C;
+    border-color: #22345C;
+}
+
+.reportes-kpi-valor {
+    font-size: 26px;
+    font-weight: 800;
+    color: #22345C;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.15;
+}
+
+.reportes-kpi-total .reportes-kpi-valor {
+    color: #fff;
+}
+
+.reportes-kpi-nombre {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #8A94A6;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.reportes-kpi-total .reportes-kpi-nombre {
+    color: #B9C4D8;
+}
+
+.reportes-kpi-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: none;
+}
+
+.reportes-grafico {
+    position: relative;
+    height: 340px;
+}
+
+.reportes-vacio {
+    text-align: center;
+    color: #8A94A6;
+    padding: 10px 0 0;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .reportes-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .reportes-kpi-total {
+        grid-column: 1 / -1;
+    }
+
+    .reportes-grafico {
+        height: 280px;
+    }
+}

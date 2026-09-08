@@ -1,0 +1,23 @@
+# Casa Ronald — MariaDB 11.4 (instalado en /etc/my.cnf.d/99-casaronald.cnf por deploy/provision.sh)
+# Dimensionado para una instancia de 1 GB de RAM compartida con nginx y PHP-FPM.
+[mariadb]
+bind-address = 127.0.0.1
+skip-name-resolve
+
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+
+innodb_buffer_pool_size = 128M
+innodb_log_file_size = 64M
+innodb_flush_method = O_DIRECT
+innodb_flush_log_at_trx_commit = 1     # durabilidad total: son expedientes de menores
+
+max_connections = 40
+table_open_cache = 400
+tmp_table_size = 32M
+max_heap_table_size = 32M
+performance_schema = OFF
+
+slow_query_log = 1
+slow_query_log_file = /var/lib/mysql/slow.log
+long_query_time = 2

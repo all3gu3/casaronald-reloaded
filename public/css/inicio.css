@@ -1,0 +1,354 @@
+/* Portada (dashboards/inicio): una sola tarjeta unificada — banner con la
+   bienvenida superpuesta, módulos y pie legal. Todas las clases llevan el
+   prefijo .inicio- para no interferir con las páginas que comparten los
+   estilos globales de home.css / slider.css / fondo.css. */
+
+.inicio {
+    max-width: 1100px;
+    margin: 10px auto 48px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+/* --- Banner con bienvenida superpuesta -------------------------------- */
+
+.inicio-hero {
+    position: relative;
+    background: #22345C;
+}
+
+/* aspect-ratio mantiene el alto correcto antes de que SlidesJS calcule el
+   suyo (el plugin usa la misma proporción 1100:380 pasada en la vista). */
+.inicio-hero .slides {
+    position: relative;
+    aspect-ratio: 1100 / 380;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* SlidesJS calcula el alto del carrusel con la proporción 1100:380 que recibe
+   en la vista y la fija en línea sobre sus dos envoltorios. En móvil, donde el
+   banner es más alto, esa altura se quedaba corta y debajo de la foto asomaba
+   una franja del fondo azul de .inicio-hero. Anclamos los envoltorios al alto
+   real de .slides para que la proporción la mande siempre el CSS. */
+.inicio-hero .slidesjs-container {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+}
+
+.inicio-hero .slidesjs-control {
+    height: 100% !important;
+}
+
+/* El plugin fija width:100% en línea pero no toca el alto: sin esto las
+   fotos se estiran. object-fit recorta al centro sin deformar. */
+.inicio-hero .slides img {
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+}
+
+.inicio-hero-velo {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(16, 26, 54, 0.72),
+        rgba(16, 26, 54, 0.25) 55%,
+        rgba(16, 26, 54, 0.12)
+    );
+    pointer-events: none;
+    z-index: 20; /* por encima de las diapositivas (el plugin usa z-index ~10 al animar) */
+}
+
+.inicio-hero-texto {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 24px 30px;
+    color: #fff;
+    pointer-events: none;
+    z-index: 30;
+}
+
+.inicio-hero-texto h1 {
+    font-size: clamp(30px, 4.6vw, 52px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+
+.inicio-hero-texto p {
+    font-size: clamp(15px, 2.2vw, 22px);
+    margin: 0;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65);
+}
+
+/* Paginación del carrusel como puntos flotantes sobre la foto. */
+.inicio-hero .slidesjs-pagination {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: none;
+    overflow: visible;
+    z-index: 40;
+}
+
+.inicio-hero .slidesjs-pagination li {
+    float: none;
+}
+
+.inicio-hero .slidesjs-pagination li a {
+    display: block;
+    width: 11px;
+    height: 11px;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    overflow: hidden;
+    text-indent: -9999px;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.inicio-hero .slidesjs-pagination li a:hover {
+    background: #fff;
+}
+
+.inicio-hero .slidesjs-pagination li a.active {
+    background: #FFC72C;
+    transform: scale(1.2);
+}
+
+.inicio-hero .slidesjs-navigation {
+    display: none;
+}
+
+/* --- Módulos ----------------------------------------------------------- */
+
+.inicio-modulos {
+    padding: 34px 24px 10px;
+}
+
+.inicio-modulos h2 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: #22345C;
+    margin-bottom: 10px;
+}
+
+.inicio-acento {
+    width: 64px;
+    height: 4px;
+    margin: 0 auto 4px;
+    border: none;
+    border-radius: 2px;
+    background: #F64740;
+}
+
+.inicio-modulos-sub {
+    text-align: center;
+    color: #8A94A6;
+    font-size: 15px;
+    margin: 10px 0 0;
+}
+
+/* Botones de módulo: la misma familia visual que la barra superior
+   (css/navbar.css), en tamaño grande. Escanear arriba, como pastilla
+   amarilla a todo lo ancho de la zona; debajo, los módulos cuadrados.
+   La zona mide lo mismo que los dos cuadrados juntos (190 + 22 + 190),
+   así la pastilla y la fila quedan alineadas al pixel. */
+.inicio-botones {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+    width: min(100%, 402px);
+    margin: 28px auto 16px;
+}
+
+/* Fila de módulos cuadrados. flex-wrap permite que en pantallas muy
+   angostas se apilen uno sobre otro, siempre centrados; y si el usuario
+   no tiene permiso de escanear, la fila vive sola sin dejar hueco. */
+.inicio-botones-fila {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+}
+
+.inicio-boton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    width: 190px;
+    height: 190px;
+    background: #fff;
+    border: 1px solid #E7ECF3;
+    color: #38598A;
+    font-weight: 600;
+    font-size: 19px;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+.inicio-boton i {
+    font-size: 58px;
+}
+
+.inicio-boton:hover {
+    background: #EEF3FA;
+    color: #22345C;
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+/* Escanear: pastilla horizontal a lo ancho que abre la ventana flotante. */
+.inicio-boton-escanear {
+    flex-direction: row;
+    gap: 14px;
+    width: 100%;
+    height: 76px;
+    border-radius: 999px;
+    background: #FFC72C;
+    border: none;
+    color: #5c4500;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 21px;
+    box-shadow: 0 2px 8px rgba(255, 199, 44, 0.55);
+    cursor: pointer;
+}
+
+.inicio-boton-escanear i {
+    font-size: 30px;
+}
+
+.inicio-boton-escanear:hover {
+    background: #F0B400;
+    color: #4a3700;
+    box-shadow: 0 8px 18px rgba(255, 199, 44, 0.6);
+}
+
+/* --- Pie legal --------------------------------------------------------- */
+
+.inicio-pie {
+    margin-top: 26px;
+    padding: 18px 28px 20px;
+    border-top: 1px solid #E7ECF3;
+    background: #FAFBFD;
+}
+
+.inicio-pie p {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: #8A94A6;
+}
+
+/* La proporción del banner se abre por pasos al angostarse la pantalla, pero
+   sin dejar de ser panorámica: en vertical una foto casi cuadrada se lee como
+   estirada aunque object-fit no deforme nada. */
+@media (max-width: 900px) {
+    .inicio-hero .slides {
+        aspect-ratio: 2 / 1;
+    }
+}
+
+@media (max-width: 640px) {
+    .inicio {
+        margin-bottom: 28px;
+        border-radius: 10px;
+    }
+
+    .inicio-hero .slides {
+        aspect-ratio: 16 / 9;
+    }
+
+    /* El texto se sube un poco para no chocar con los puntos del carrusel. */
+    .inicio-hero-texto {
+        padding: 0 18px 26px;
+    }
+
+    .inicio-hero-texto h1 {
+        font-size: clamp(26px, 8.5vw, 40px);
+        letter-spacing: 1px;
+    }
+
+    .inicio-hero-texto p {
+        font-size: clamp(14px, 4vw, 18px);
+    }
+
+    .inicio-hero .slidesjs-pagination {
+        bottom: 10px;
+    }
+
+    .inicio-hero .slidesjs-pagination li a {
+        width: 9px;
+        height: 9px;
+    }
+
+    /* La zona se encoge a la medida de los cuadrados chicos (150 + 14 + 150)
+       para que la pastilla siga alineada con la fila. */
+    .inicio-botones {
+        gap: 14px;
+        width: min(100%, 314px);
+    }
+
+    .inicio-botones-fila {
+        gap: 14px;
+    }
+
+    .inicio-botones-fila .inicio-boton {
+        width: 150px;
+        height: 150px;
+    }
+
+    .inicio-botones-fila .inicio-boton i {
+        font-size: 44px;
+    }
+
+    .inicio-boton-escanear {
+        height: 62px;
+        gap: 12px;
+        font-size: 18px;
+    }
+
+    .inicio-boton-escanear i {
+        font-size: 24px;
+    }
+}
+
+/* Teléfono en horizontal (o cualquier pantalla muy baja): la proporción cede
+   ante el alto disponible para que el banner no tape la pantalla completa. */
+@media (max-height: 480px) and (orientation: landscape) {
+    .inicio-hero .slides {
+        aspect-ratio: auto;
+        height: 58vh;
+    }
+}
