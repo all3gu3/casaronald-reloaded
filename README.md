@@ -1,5 +1,14 @@
 # Casa Ronald McDonald: Expediente Digital
-Sistema de gestión de huéspedes y servicios de la operación de la **Casa Ronald McDonald (Puebla)**: El sistema cuenta con un expediente digital del menor y sus acompañantes (con estudio socioeconómico) para facilitar la información a trabajadores sociales, credencial imprimible con código QR de 6 caracteres, registro de servicios por escaneo (comedor, lavandería, escuelita, transporte, entradas/salidas) y concentrados de datos de entrada/salida, y uso de servicios en gráficos y formatos exportables.
+
+![Laravel 12 · PHP 8.2+](https://img.shields.io/badge/Laravel_12-PHP_8.2%2B-FF2D20?logo=laravel&logoColor=white)
+![MariaDB 11.4 / MySQL 8](https://img.shields.io/badge/MariaDB_11.4-MySQL_8-003545?logo=mariadb&logoColor=white)
+![23 tablas propias](https://img.shields.io/badge/tablas_propias-23-blue)
+![17 casos de uso](https://img.shields.io/badge/casos_de_uso-17-blueviolet)
+![88 pruebas · 434 aserciones](https://img.shields.io/badge/pruebas-88_%C2%B7_434_aserciones-brightgreen)
+![EC2 t3.micro · Amazon Linux 2023](https://img.shields.io/badge/EC2_t3.micro-Amazon_Linux_2023-FF9900?logo=amazonec2&logoColor=white)
+![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-yellow)
+
+#### Sistema de gestión de huéspedes y servicios de la operación de la **Casa Ronald McDonald (Puebla)**: El sistema cuenta con un expediente digital del menor y sus acompañantes (con estudio socioeconómico) para facilitar la información a trabajadores sociales, credencial imprimible con código QR de 6 caracteres, registro de servicios por escaneo (comedor, lavandería, escuelita, transporte, entradas/salidas) y concentrados de datos de entrada/salida, y uso de servicios en gráficos y formatos exportables.
 
 ---
 #### Acceder Demo: https://54.205.207.133/
