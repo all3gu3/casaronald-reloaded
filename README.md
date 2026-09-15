@@ -1,12 +1,11 @@
 # Casa Ronald McDonald: Expediente Digital
----
+Sistema de gestión de huéspedes y servicios de la operación de la **Casa Ronald McDonald (Puebla)**: El sistema cuenta con un expediente digital del menor y sus acompañantes (con estudio socioeconómico) para facilitar la información a trabajadores sociales, credencial imprimible con código QR de 6 caracteres, registro de servicios por escaneo (comedor, lavandería, escuelita, transporte, entradas/salidas) y concentrados de datos de entrada/salida, y uso de servicios en gráficos y formatos exportables.
 
+---
 #### Acceder Demo: https://54.205.207.133/
 <img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/f11cdf0c-bae8-4719-9917-ed2981720eff" />
 
 ---
-
-Sistema de gestión de huéspedes y servicios de la operación de la **Casa Ronald McDonald (Puebla)**: El sistema cuenta con un expediente digital del menor y sus acompañantes (con estudio socioeconómico) para facilitar la información a trabajadores sociales, credencial imprimible con código QR de 6 caracteres, registro de servicios por escaneo (comedor, lavandería, escuelita, transporte, entradas/salidas) y concentrados de datos de entrada/salida, y uso de servicios en gráficos y formatos exportables.
 
 ## Gestión de uso de servicios a cargo del personal operativo
 El objetivo del Expediente Digital es que cada familia se registre una vez y que a partir de ahí baste con escanear su credencial para dejar constancia de cada servicio que recibe.
