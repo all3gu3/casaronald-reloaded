@@ -41,7 +41,7 @@ El diseño de la interfaz de usuario es adaptable dispositivos móviles
 
 | Presentación y funcionamiento para dispositivos móviles |
 |---|
-| <img height="300" alt="image" src="https://github.com/user-attachments/assets/edb54f96-6e5b-4955-98cb-8d272a5dc30a" /> <img height="300" alt="image" src="https://github.com/user-attachments/assets/51969473-bca0-4428-a912-05e1172b4f99" /> <img height="300" alt="image" src="https://github.com/user-attachments/assets/345a745b-df61-436e-8b75-f437223c2862" /> <img height="300" alt="image" src="https://github.com/user-attachments/assets/7adc9947-ec62-408a-8d87-6f39c3cc8b63" /> <img height="300" alt="image" src="https://github.com/user-attachments/assets/d0f73247-f56a-4f44-87bb-2d6b3dead98a" /> |
+| <img height="300" alt="image" src="https://github.com/user-attachments/assets/edb54f96-6e5b-4955-98cb-8d272a5dc30a" /> <img height="300" alt="image" src="https://github.com/user-attachments/assets/51969473-bca0-4428-a912-05e1172b4f99" /> <img height="300" alt="image" src="https://github.com/user-attachments/assets/7adc9947-ec62-408a-8d87-6f39c3cc8b63" /> <img height="300" alt="image" src="https://github.com/user-attachments/assets/d0f73247-f56a-4f44-87bb-2d6b3dead98a" /> |
 
 ---
 # Arquitectura y diseño del sistema
@@ -78,16 +78,18 @@ La cobertura funcional sigue el proceso público de admisión de la Fundación: 
 
 **Fuera de alcance por ahora, previsto como evolución:** el módulo de habitaciones y ocupación (la tabla `registro_operativo` ya está modelada, pero sin pantallas), la administración del catálogo de trabajadoras sociales desde la interfaz, y la extensión a varias Casas y Salas Familiares con datos segregados por sede.
 
-## Modelo Entidad-Relación
+---
+Diagramas de arquitectura: clases y modelado de datos
+
 | Modelo Entidad-Relación |
 |---|
 | <img width=100% alt="image" src="https://github.com/user-attachments/assets/0b6f19db-dd2e-49f9-be12-2de0c5cc39e2" /> |
 
-## Diagrama de Clases
 | Diagrama de Clases |
 |---|
 | <img width=100% alt="image" src="https://github.com/user-attachments/assets/d23cab08-31c4-4f21-a8e1-42d87c377d1b" /> |
 
+## Arquitectura MVC
 | Cómo atraviesa una petición la aplicación |
 |---|
 | <img width=100% alt="image" src="https://github.com/user-attachments/assets/feb202e7-b528-4e8d-80fa-6bc9a10575cb" /> |
@@ -137,6 +139,36 @@ Fábricas para los 21 modelos del dominio (faker `es_MX`) con estados útiles
 (`master()`, `inactivo()`, `cerrada()`, `egresado()`); en pruebas usa `->recycle()`
 para no crear la cadena de 9 catálogos por cada niño.
 
+---
+
+## Seguridad, privacidad y cumplimiento
+
+### Marco legal
+
+El sistema maneja datos personales de menores y datos sensibles —salud y situación socioeconómica— bajo la Ley Federal de Protección de Datos Personales en Posesión de los Particulares. Eso implica aviso de privacidad y consentimiento en el momento del registro, atención a los derechos ARCO y minimización de datos: el sistema captura únicamente lo que el expediente en papel ya recaba, ni un campo más.
+
+### Controles implementados
+
+- Sesión obligatoria en toda la aplicación salvo `/login` y las páginas públicas de esta propuesta, que no contienen datos de familias.
+- Autorización por capas: middleware para lo estructural (`auth`, `active`, `master`) y gates para lo fino (`escanear`, `descargar-expediente`, `manage-users`).
+- Contraseñas con bcrypt de 12 rondas; la contraseña maestra se define en el `.env` del servidor, nunca en el repositorio.
+- Limitación de intentos en el login: 10 por minuto y por IP.
+- Bitácora de auditoría: inicios de sesión, escaneos, descargas, altas y ediciones quedan anotados con cuenta, momento y detalle. Solo se inserta; no existe camino para editarla desde la aplicación.
+- Archivos sensibles fuera del disco público: carnets y PDF se generan al pedirlos y se sirven con sesión; las fotos de expediente viven bajo el symlink público con nombre aleatorio de 40 caracteres.
+- Sin salidas a internet en tiempo de ejecución: el QR se genera en memoria y las librerías del navegador (jQuery, Bootstrap, DataTables, Chart.js) están vendorizadas en el propio servidor.
+
+### Licencia y entrega
+
+- **Licencia MIT**, con el repositorio transferido a la Fundación. Sin costo presente ni futuro y sin dependencia del donante.
+- **Entregables:** código, este documento técnico, la guía de uso para el personal de la Casa y los scripts de aprovisionamiento y despliegue.
+- **Los datos son de la Fundación** y exportables en cualquier momento: MySQL/MariaDB estándar, sin formatos propietarios.
+
+### Requisitos de operación
+
+- **Servidor:** una instancia modesta (2 vCPU, 1–4 GB) o el estándar corporativo que Tecnología defina. Es un monolito PHP + MySQL convencional, empaquetable en contenedores si la política lo requiere.
+- **En sitio:** una computadora con internet y una impresora para las credenciales; en cada punto de servicio, un teléfono o un lector QR por USB.
+- **Cuentas:** una por persona del equipo, creadas y administradas por la dirección de la Casa desde el propio sistema.
+  
 ## Despliegue en producción
 
 La carpeta [`deploy/`](deploy/README.md) contiene todo lo necesario para un servidor
